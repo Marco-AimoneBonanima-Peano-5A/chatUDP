@@ -15,18 +15,20 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Prof Matteo Palitto 
+ * @author Marco Aimone Bonanima
  */
 public class SendUserInputToServer implements Runnable {
+
     DatagramSocket socket;
     InetAddress address;
     int UDP_port;
-    
+
     SendUserInputToServer(DatagramSocket socket, InetAddress address, int UDP_port) {
         this.socket = socket;
         this.address = address;
         this.UDP_port = UDP_port;
     }
+
     /**
      *
      */
@@ -34,15 +36,20 @@ public class SendUserInputToServer implements Runnable {
     public void run() {
 
         byte[] buffer;
-        String messaggio;
+        String messaggio, user;
         Scanner tastiera = new Scanner(System.in);
         DatagramPacket userDatagram;
+        Scanner input = new Scanner(System.in);
 
         try {
+            System.out.print("Inserisci l'username ");
+            user = input.nextLine();
             System.out.print("> ");
+
             do {
                 //Leggo da tastiera il messaggio utente vuole inviare
                 messaggio = tastiera.nextLine();
+                messaggio = user.concat(": " + messaggio);
 
                 //Trasformo in array di byte la stringa che voglio inviare
                 buffer = messaggio.getBytes("UTF-8");
