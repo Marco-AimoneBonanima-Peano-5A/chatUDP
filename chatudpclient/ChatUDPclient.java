@@ -16,11 +16,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import chatudpclient.ReceiveFromServerAndPrint;
 
 /**
  *
- * @author Prof Matteo Palitto
+ * @author Marco Aimone 
  */
 public class ChatUDPclient {
 
@@ -28,8 +27,12 @@ public class ChatUDPclient {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws UnknownHostException {
+/**
+ * Modificare Client per richiedre all'utente un "user name" affinche'
+ * possa essere inviato al server insieme ai messaggi
+ */
 
-        String IP_address = "127.0.0.1";
+        String IP_address = "10.100.7.200";
         InetAddress address = InetAddress.getByName(IP_address);
         int UDP_port = 1077;
 
@@ -38,7 +41,7 @@ public class ChatUDPclient {
         try {
 
             socket = new DatagramSocket();
-            
+
 
             //creo il thread che riceve i messaggi dal server e scrive su schermo i messaggi ricevuti
             Thread receiveAndPrint = new Thread(new ReceiveFromServerAndPrint(socket));
@@ -66,5 +69,5 @@ public class ChatUDPclient {
         }
 
         }
-    
+
 }
