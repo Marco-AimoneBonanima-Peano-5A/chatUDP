@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Prof Matteo Palitto
+ * @author aimonebonanima.marco
  */
 public class SendUserInputToServer implements Runnable {
 
