@@ -5,6 +5,7 @@
  */
 package chatudpclient;
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Marco Aimone 
+ * @author Prof Matteo Palitto
  */
 public class ChatUDPclient {
 
@@ -32,6 +33,21 @@ public class ChatUDPclient {
  * possa essere inviato al server insieme ai messaggi
  */
 
+        Runnable r = new Runnable() {
+            public void run() {
+                new ChatUDPclient();
+            }
+        };
+             
+        EventQueue.invokeLater(r);
+
+        try {
+            
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GUI();
+            }
+        });
         String IP_address = "10.100.7.200";
         InetAddress address = InetAddress.getByName(IP_address);
         int UDP_port = 1077;
@@ -69,5 +85,8 @@ public class ChatUDPclient {
         }
 
         }
-
+    catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+}
 }
