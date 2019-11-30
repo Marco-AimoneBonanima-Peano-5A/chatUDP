@@ -45,6 +45,8 @@ public class UDPEcho implements Runnable {
     }
 
     public void run() {
+        LinkedList<String> ultimiMessaggi = new LinkedList<String>();
+
         DatagramPacket answer; //datagram usato per creare il pacchetto di risposta
         byte[] buffer = new byte[8192]; //buffer per contenere il messaggio ricevuto o da inviare
         // creo un un datagramma UDP usando il buffer come contenitore per i messaggi
@@ -74,6 +76,13 @@ public class UDPEcho implements Runnable {
                 if(message == "quit") {
                     //client si e' rimosso da chat, lo rimuovo da lista dei client connessi
                     clients.remove(clientID);
+                }
+                
+                if(ultimiMessaggi.size()<10)
+                    ultimiMessaggi.add(message);
+                else{
+                    ultimiMessaggi.removeLast();
+                    ultimiMessaggi.addFirst(message);
                 }
 
                 //invio il messaggio ricevuto a tutti i client connessi al server
